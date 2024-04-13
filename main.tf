@@ -9,13 +9,13 @@ terraform {
 
   backend "s3" {
 
-   bucket         = "igorsr-dev-terraform-state-bucket" 
-   key            = "state/terraform.tfstate"
-   region         = "us-east-1"
-   encrypt        = true
-   kms_key_id     = "alias/terraform-bucket-kms-key"
-   dynamodb_table = "terraform-state" 
- }
+    bucket         = "igorsr-dev-terraform-state-bucket"
+    key            = "state/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    kms_key_id     = "alias/terraform-bucket-kms-key"
+    dynamodb_table = "terraform-state"
+  }
 
   required_version = ">= 1.2.0"
 }
@@ -41,9 +41,9 @@ data "aws_ami" "ubuntu" {
 }
 
 
-resource "aws_instance" "example_ec2_instance"{
+resource "aws_instance" "example_ec2_instance" {
 
-  ami = data.aws_ami.ubuntu.id
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
 
   tags = {
