@@ -15,7 +15,7 @@ resource "aws_lambda_function" "lambda" {
 
   runtime = "nodejs18.x"
 
-  timeout = 15
+  timeout     = 15
   memory_size = 1024
   environment {
     variables = {
