@@ -41,13 +41,13 @@ data "aws_ami" "ubuntu" {
 }
 
 
-resource "aws_instance" "example_ec2_instance" {
+# resource "aws_instance" "example_ec2_instance" {
 
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+#   ami           = data.aws_ami.ubuntu.id
+#   instance_type = "t3.micro"
 
-  tags = {
-    Name = "HelloWorld"
-  }
+#   tags = {
+#     Name = "HelloWorld"
+#   }
 
-}
+# }
