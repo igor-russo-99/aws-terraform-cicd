@@ -31,7 +31,7 @@ resource "aws_security_group" "kafka_sg" {
 # Define EC2 instances for Kafka 
 resource "aws_instance" "kafka_instance" {
   ami             = data.aws_ami.ubuntu.id
-  instance_type   = "t3.medium"
+  instance_type   = "t3.large"
   security_groups = [aws_security_group.kafka_sg.name]
   key_name        = "realtime"
 
