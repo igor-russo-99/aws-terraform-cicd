@@ -11,6 +11,14 @@ resource "aws_security_group" "kafka_sg" {
     cidr_blocks = ["0.0.0.0/0"] # Adjust as per your network requirements
   }
 
+  # Allow inbound SSH traffic for administration purposes (optional)
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Restrict as per your requirements
+  }
+
   # Allow outbound traffic
   egress {
     from_port   = 0
