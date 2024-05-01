@@ -31,7 +31,7 @@ resource "aws_security_group" "kafka_sg" {
 # Define EC2 instances for Kafka 
 resource "aws_instance" "kafka_instance" {
   ami             = data.aws_ami.ubuntu.id
-  instance_type   = "t3.micro"
+  instance_type   = "t3.medium"
   security_groups = [aws_security_group.kafka_sg.name]
   key_name        = "realtime"
 
@@ -42,9 +42,9 @@ resource "aws_instance" "kafka_instance" {
     sudo yum install -y java-1.8.0-openjdk-devel
     
     # Install Kafka
-    wget https://downloads.apache.org/kafka/2.8.1/kafka_2.13-2.8.1.tgz
-    tar -xzf kafka_2.13-2.8.1.tgz
-    cd kafka_2.13-2.8.1
+    wget https://downloads.apache.org/kafka/3.7.0/kafka_2.12-3.7.0.tgz
+    tar -xvf kafka_2.12-3.7.0.tgz
+    cd kafka_2.12-3.7.0
     
     # Start Kafka server (this is just an example, you may need to modify it based on your Kafka setup)
     nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
