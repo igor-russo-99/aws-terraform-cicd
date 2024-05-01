@@ -59,15 +59,15 @@ resource "aws_instance" "kafka_instance" {
   user_data = <<-EOF
     #!/bin/bash
     # Install Java
-    sudo yum update -y
-    sudo yum install -y java-1.8.0-openjdk-devel
+    sudo apt update -y
+    sudo apt install -y openjdk-8-jdk
     
     # Install Kafka
     wget https://downloads.apache.org/kafka/3.7.0/kafka_2.12-3.7.0.tgz
     tar -xvf kafka_2.12-3.7.0.tgz
     cd kafka_2.12-3.7.0
 
-    export KAFKA_HEAP_OPTS="-Xmx4G -Xms4G"
+    export KAFKA_HEAP_OPTS="-Xmx512M -Xms512M"
 
     #nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.log 2>&1 &
     
