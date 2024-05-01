@@ -49,10 +49,14 @@ resource "aws_instance" "kafka_instance" {
 
         export KAFKA_HEAP_OPTS="-Xmx2G -Xms2G"
 
-        nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.log 2>&1 &
+        # nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zookeeper.log 2>&1 &
         
-        # Start Kafka server (this is just an example, you may need to modify it based on your Kafka setup)
-        nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
+        #Start Kafka server (this is just an example, you may need to modify it based on your Kafka setup)
+
+        # nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
+        bin/zookeeper-server-start.sh -daemon config/zookeeper.properties && \
+        while ! nc -z localhost 2181; do sleep 0.1; done && \
+        bin/kafka-server-start.sh -daemon config/server.properties
         EOH
   }
 
