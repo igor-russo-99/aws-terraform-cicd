@@ -28,6 +28,54 @@ resource "aws_security_group" "kafka_sg" {
   }
 }
 
+# Create security group for ZooKeeper
+resource "aws_security_group" "zookeeper_sg" {
+  name        = "zookeeper_sg"
+  description = "Security group for ZooKeeper"
+
+  # Allow inbound traffic on ZooKeeper port (default 2181)
+  ingress {
+    from_port   = 2181
+    to_port     = 2181
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Adjust as per your network requirements
+  }
+
+  # Allow outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
+resource "aws_instance" "zookeeper_instance" {
+  ami             = "your_ami_id"
+  instance_type   = data.aws_ami.ubuntu.id
+  security_groups = [aws_security_group.zookeeper_sg.name]
+
+  user_data = <<-EOF
+    #!/bin/bash
+    # Install Java
+    sudo apt update -y
+    sudo apt install -y openjdk-8-jdk
+
+    # Install ZooKeeper
+    wget https://downloads.apache.org/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz
+    tar -xzf apache-zookeeper-3.7.0-bin.tar.gz
+    cd apache-zookeeper-3.7.0-bin
+    
+    # Start ZooKeeper server (this is just an example, you may need to modify it based on your ZooKeeper setup)
+    nohup bin/zkServer.sh start > zookeeper.log 2>&1 &
+  EOF
+
+  tags = {
+    Name = "ZooKeeper Instance"
+  }
+}
+
 # Define EC2 instances for Kafka 
 resource "aws_instance" "kafka_instance" {
   ami             = data.aws_ami.ubuntu.id
@@ -35,6 +83,7 @@ resource "aws_instance" "kafka_instance" {
   security_groups = [aws_security_group.kafka_sg.name]
   key_name        = "realtime"
 
+  depends_on = [aws_instance.zookeeper_instance]
   # provisioner "local-exec" {
   #   command = <<EOH
   #       #!/bin/bash
