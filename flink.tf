@@ -33,6 +33,8 @@ resource "aws_instance" "flink_instance" {
   ami             = data.aws_ami.ubuntu.id
   instance_type   = "t3.micro"
   security_groups = [aws_security_group.flink_sg.name]
+  
+  key_name = "realtime"
 
   user_data = <<-EOF
     #!/bin/bash
