@@ -52,8 +52,8 @@ resource "aws_security_group" "zookeeper_sg" {
 
 
 resource "aws_instance" "zookeeper_instance" {
-  ami             = "your_ami_id"
-  instance_type   = data.aws_ami.ubuntu.id
+  ami             = data.aws_ami.ubuntu.id
+  instance_type   = "t3.small"
   security_groups = [aws_security_group.zookeeper_sg.name]
 
   user_data = <<-EOF
