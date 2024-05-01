@@ -39,13 +39,14 @@ resource "aws_instance" "flink_instance" {
   user_data = <<-EOF
     #!/bin/bash
     # Install Java
-    sudo yum update -y
-    sudo yum install -y java-1.8.0-openjdk-devel
-    
+    sudo apt update -y
+    sudo apt install openjdk-8-jre-headless   
+
+
     # Install Flink
-    wget https://downloads.apache.org/flink/flink-1.14.0/flink-1.14.0-bin-scala_2.12.tgz
-    tar -xzf flink-1.14.0-bin-scala_2.12.tgz
-    cd flink-1.14.0
+    wget https://downloads.apache.org/flink/flink-1.19.0/flink-1.19.0-bin-scala_2.12.tgz 
+    tar -xzf flink-1.19.0-bin-scala_2.12.tgz 
+    cd flink-1.19.0
     
     # Start Flink cluster (this is just an example, you may need to modify it based on your Flink setup)
     ./bin/start-cluster.sh
