@@ -30,8 +30,8 @@ resource "aws_security_group" "flink_sg" {
 
 
 resource "aws_instance" "flink_instance" {
-  ami             = data.aws_ami.ubuntu 
-  instance_type   = "t3.micro" 
+  ami             = data.aws_ami.ubuntu
+  instance_type   = "t3.micro"
   security_groups = [aws_security_group.flink_sg.name]
 
   user_data = <<-EOF
