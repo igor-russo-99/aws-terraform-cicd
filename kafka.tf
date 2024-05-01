@@ -45,6 +45,9 @@ resource "aws_instance" "kafka_instance" {
     wget https://downloads.apache.org/kafka/3.7.0/kafka_2.12-3.7.0.tgz
     tar -xvf kafka_2.12-3.7.0.tgz
     cd kafka_2.12-3.7.0
+
+    export KAFKA_HEAP_OPTS="-Xmx4G -Xms4G"
+
     
     # Start Kafka server (this is just an example, you may need to modify it based on your Kafka setup)
     nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
