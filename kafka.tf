@@ -24,10 +24,10 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
 resource "aws_msk_cluster" "poc_cluster" {
   cluster_name           = "example"
   kafka_version          = "3.2.0"
-  number_of_broker_nodes = 3
+  number_of_broker_nodes = 2
 
   broker_node_group_info {
-    instance_type = "kafka.m5.large"
+    instance_type = "kafka.t3.small"
     client_subnets = [
       aws_subnet.subnet_az1.id,
       aws_subnet.subnet_az2.id,
