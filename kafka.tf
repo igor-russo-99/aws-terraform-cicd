@@ -21,7 +21,7 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
 }
 
 
-resource "aws_msk_cluster" "poc_cluster"{
+resource "aws_msk_cluster" "poc_cluster" {
   cluster_name           = "example"
   kafka_version          = "3.2.0"
   number_of_broker_nodes = 3
