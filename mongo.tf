@@ -8,7 +8,7 @@ resource "aws_instance" "mongodb_instance" {
   }
 
   # Example: Define your security group here or reference an existing one
-  security_groups = [aws_security_group.sg_mongo]
+  security_groups = [aws_security_group.sg_mongo.name]
 
   # Example: Define your key pair for SSH access
   key_name = "realtime"
