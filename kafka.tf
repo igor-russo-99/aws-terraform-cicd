@@ -11,9 +11,9 @@
 #   name = "msk_broker_logs"
 # }
 
-# resource "aws_s3_bucket" "bucket" {
-#   bucket = "igorsr-msk-broker-logs-bucket"
-# }
+resource "aws_s3_bucket" "bucket" {
+  bucket = "igorsr-msk-broker-logs-bucket"
+}
 
 # # resource "aws_s3_bucket_acl" "bucket_acl" {
 # #   bucket = aws_s3_bucket.bucket.id
