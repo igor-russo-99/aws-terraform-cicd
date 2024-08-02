@@ -33,7 +33,7 @@ resource "aws_msk_cluster" "poc_cluster" {
     ]
     storage_info {
       ebs_storage_info {
-        volume_size = 50000
+        volume_size = 50
       }
     }
     security_groups = [aws_security_group.sg.id]
