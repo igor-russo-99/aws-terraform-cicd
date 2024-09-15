@@ -42,10 +42,10 @@ data "aws_ami" "ubuntu" {
 
 
 resource "aws_instance" "example_ec2_instance" {
-  ami           = data.aws_ami.ubuntu.id
+  ami = data.aws_ami.ubuntu.id
   # security_groups = [aws_security_group.sg.id]
   instance_type = "t3.micro"
-  key_name = "realtime"
+  key_name      = "realtime"
   tags = {
     Name = "HelloWorld"
   }

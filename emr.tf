@@ -36,7 +36,7 @@ resource "aws_emrserverless_application" "spark_app" {
 
   tags = {
     Name        = "EMR Serverless"
-    Environment = "dev" 
+    Environment = "dev"
   }
 }
 
@@ -116,7 +116,7 @@ resource "aws_s3_bucket" "artifacts_bucket" {
   bucket = "igor-sr-your-artifacts-bucket-name"
 
   tags = {
-    Name = "Artifacts Bucket"
+    Name        = "Artifacts Bucket"
     Environment = "production"
   }
 }
@@ -126,7 +126,7 @@ resource "aws_s3_bucket" "checkpoints_bucket" {
   bucket = "igorsr-your-checkpoints-bucket-name"
 
   tags = {
-    Name = "Checkpoints Bucket"
+    Name        = "Checkpoints Bucket"
     Environment = "production"
   }
 }
@@ -191,24 +191,24 @@ resource "null_resource" "submit_spark_job" {
 
 
 resource "aws_dynamodb_table" "sql_queries" {
-  name           = "sql_queries"
-  billing_mode   = "PAY_PER_REQUEST" # DynamoDB on-demand mode, you can also use PROVISIONED
-  hash_key       = "query_id"        # Primary key for DynamoDB (partition key)
+  name         = "sql_queries"
+  billing_mode = "PAY_PER_REQUEST" # DynamoDB on-demand mode, you can also use PROVISIONED
+  hash_key     = "query_id"        # Primary key for DynamoDB (partition key)
 
   attribute {
     name = "query_id"
-    type = "S"  # 'S' stands for String
+    type = "S" # 'S' stands for String
   }
 
   tags = {
-    Name = "Streaming Ingestion SQL Queries Table"
+    Name        = "Streaming Ingestion SQL Queries Table"
     Environment = "dev"
   }
 }
 resource "aws_dynamodb_table_item" "query_001" {
   table_name = aws_dynamodb_table.sql_queries.name
   hash_key   = "query_id"
-  
+
   item = <<ITEM
   {
     "query_id": {"S": "query_001"},
